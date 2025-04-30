@@ -1,3 +1,4 @@
+import cors from "cors"; 
 import express from  'express'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
@@ -17,6 +18,10 @@ connectDB();
 configurePassport();  
 
 const app = express();
+
+app.use(cors({ origin: "*" }));
+// Enable CORS for all routes and origins (for development only, restrict in production)
+// app.use(cors({ origin: process.env.FRONTEND_URL })); // Use this in production to restrict to your frontend URL
 
 // --- Passport Middleware ---
 app.use(passport.initialize());
